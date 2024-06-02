@@ -216,35 +216,6 @@ Examples:
    # Add the uuid of a Ticket you created earlier
    curl 'localhost:4000/api/json/helpdesk/tickets/<uuid>'
    ```
-1. Test ticket creation via ExUnit
-   ```elixir
-   defmodule Helpdesk.Support.TicketTest do
-     use HelpdeskWeb.Support.ConnCase
-
-     setup %{conn: conn} do
-       # The 'vnd.api+json' content type must be added as a header:
-       {:ok,
-        conn:
-          conn
-          |> put_req_header("accept", "application/vnd.api+json")
-          |> put_req_header("content-type", "application/vnd.api+json")}
-     end
-
-     test "creates new ticket", %{conn: conn} do
-       conn =
-         post(conn, ~p"/api/json/helpdesk/tickets", %{
-           data: %{
-             type: "ticket",
-             attributes: %{
-               subject: "this ticket was created through the JSON API"
-             }
-           }
-         })
-
-       json_response(conn, 201)
-     end
-   end
-   ```
 
 ## Open API
 
